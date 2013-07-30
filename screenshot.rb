@@ -8,7 +8,7 @@
 #                b) select a reasonable MAX_DELAY_TIME
 #                c) symlink and chmod +x screenshot.rb into your favorite bin folder
 
-VERSION = '1.2'
+VERSION = '1.3'
 SCREENSHOT_FOLDER = '/home/cameron/images/screenshots'
 MAX_DELAY_TIME = 20
 
@@ -38,6 +38,8 @@ def main
     else
       puts 'unknown input'
     end
+  else
+    shoot()
   end
 
 end
