@@ -4,7 +4,7 @@ cameron's ruby scripts
 screenshot.rb:
 ==============
 Created: July 2013
-Last Updated: July 2013 (1.3)
+Last Updated: July 2013 (1.4)
 Purpose: takes a screenshot using scrot after argv[0] number of seconds
 Dependencies: scrot
 Configuration & Installation:

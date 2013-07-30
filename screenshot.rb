@@ -8,7 +8,7 @@
 #                b) select a reasonable MAX_DELAY_TIME
 #                c) symlink and chmod +x screenshot.rb into your favorite bin folder
 
-VERSION = '1.3'
+VERSION = '1.4'
 SCREENSHOT_FOLDER = '/home/cameron/images/screenshots'
 MAX_DELAY_TIME = 20
 
@@ -27,13 +27,14 @@ end
 
 def main
   puts "screenshot.rb #{VERSION}"
-  delay &&= ARGV[0] # assign if it exists
+  delay = ARGV[0] if ARGV[0]
 
   if delay && delay.numeric?
     delay_shoot(ARGV[0])
   elsif delay && !delay.numeric?
     input = delay # rarely we will call with a proper string, so now we'll just call it input
     if input == 'clear'
+      puts 'clearing screenshot folder'
       `rm #{SCREENSHOT_FOLDER}/* -rf`
     else
       puts 'unknown input'
