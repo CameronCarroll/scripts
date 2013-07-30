@@ -15,7 +15,8 @@ MAX_DELAY_TIME = 20
 def shoot()
   time = Time.new
   puts "Taking screenshot at #{time}"
-  time = time.to_s[0...-6].gsub(' ', '_').gsub('-', '').gsub(':', '')
+  # strip tz info, replace some punctuation for readability:
+  time = time.to_s[0...-6].gsub(' ', '_').gsub('-', '').gsub(':', '') 
   `scrot #{SCREENSHOT_FOLDER}/#{time}.png`
 end
 
