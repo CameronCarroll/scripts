@@ -5,6 +5,7 @@
 # dependencies: viddl-rb
 
 DOWNLOAD_PATH = "/home/cameron/music/downloads"
+VERSION = "1.2"
 
 def download_video(url)
   `viddl-rb #{url} --save-dir #{DOWNLOAD_PATH}`
@@ -20,19 +21,24 @@ def convert_video(path)
   return mp3_path
 end
 
-if ARGV[0]
-  url = ARGV[0]
-  title = grab_title(url)
-  video_file_path = DOWNLOAD_PATH + "/" + title
-  puts "found video: " + title
-  puts "saving video to: " + video_file_path
-  download_video(url)
-  puts "converting video to audio..."
-  audio_path = convert_video(video_file_path)
-  puts "deleting video file"
-  if File.exists? audio_path
-    File.delete video_file_path
+def main
+  puts "youtube-video download/conversion script, version " + VERSION
+  if ARGV[0]
+    url = ARGV[0]
+    title = grab_title(url)
+    video_file_path = DOWNLOAD_PATH + "/" + title
+    puts "found video: " + title
+    puts "saving video to: " + video_file_path
+    download_video(url)
+    puts "converting video to audio..."
+    audio_path = convert_video(video_file_path)
+    puts "deleting video file"
+    if File.exists? audio_path
+      File.delete video_file_path
+    end
+  else
+    puts "requires an argument. don't forget to stick it in quotes!"
   end
-else
-  puts "requires an argument. don't forget to stick it in quotes!"
 end
+
+main
