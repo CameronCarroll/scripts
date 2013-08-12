@@ -34,7 +34,7 @@ def clean(mp3_info)
   end
 
   if title_pieces && title_pieces.length > 2
-    puts 'ERROR: Cant parse this special case. Tag it by hand.'
+    $stderr.puts 'ERROR: Cant parse this special case. Tag it by hand.'
     abort
   end
 
