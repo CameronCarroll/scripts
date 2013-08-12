@@ -29,7 +29,7 @@ vid.rb
 
 Created: July 2013
 
-Last Updated: August 2013 (1.2)
+Last Updated: August 2013 (1.3)
 
 Purpose: Part of the mp3grab.rb pipeline or usable alone, this script grabs a
 youtube video using viddl-rb and converts it into mp3 using ffmpeg.

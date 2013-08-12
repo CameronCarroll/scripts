@@ -5,11 +5,13 @@
 # dependencies: viddl-rb
 
 DOWNLOAD_PATH = "/home/cameron/music/downloadtest"
-VERSION = "1.2"
+VERSION = "1.3"
+
+require 'pry'
 
 def download_video(url)
 
-  $stderr.puts `viddl-rb #{url} --save-dir #{DOWNLOAD_PATH}`
+  $stderr.puts `viddl-rb -d curl #{url} --save-dir #{DOWNLOAD_PATH}`
 end
 
 def grab_title(url)
@@ -17,8 +19,13 @@ def grab_title(url)
 end
 
 def convert_video(path)
-  mp3_path = path[0..-4] + 'mp3'
-  `ffmpeg -i #{path} -b:a 320K -vn #{mp3_path}`
+
+  mp3_path = File.dirname(path) + '/' + File.basename(path, ".*") + '.mp3'
+  if path =~ /.mp4\z/i
+    `ffmpeg -i #{path} -b:a 320K -vn #{mp3_path}`
+  elsif path =~ /.webm\z/i
+    `ffmpeg -i #{path} -b:a 320K -acodec libmp3lame -aq 4 #{mp3_path}`
+  end
   return mp3_path
 end
 
@@ -28,13 +35,18 @@ def main
     title = grab_title(url)
     video_file_path = DOWNLOAD_PATH + "/" + title
     download_video(url)
-    audio_path = convert_video(video_file_path)
-    if File.exists? audio_path
-      File.delete video_file_path
-      puts audio_path
+    if File.size? video_file_path
+      audio_path = convert_video(video_file_path)
+      if File.exists? audio_path
+        File.delete video_file_path
+        puts audio_path
+      end
+    else
+      puts 'vid.rb improper exit'
     end
+    
   else
-    puts '0'
+    puts 0
   end
 end
 
