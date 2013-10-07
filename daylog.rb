@@ -7,7 +7,7 @@
 DOC_DIRECTORY = '/home/cameron/docs/write_everyday/'
 
 def main
-  month = Date.today.strftime("%B")
+  month = Time.new.strftime("%B")
   day = Time.new.day
   filestring = DOC_DIRECTORY + "#{month}"
 
