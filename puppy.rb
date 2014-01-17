@@ -5,12 +5,13 @@
 # Purpose: How old is my puppy?
 #
 
-today_yday = Time.now.yday
-puppy_birthday_yday = Time.local(2013,9,11).yday
-puppy_adoption_yday = Time.local(2013,11,24).yday
 
-puppy_age = today_yday - puppy_birthday_yday
-puppy_time_with_us = today_yday - puppy_adoption_yday
+today = Time.now
+birthday = Time.local(2013,9,11)
+adoption = Time.local(2013,11,24)
+
+age = ((today - birthday) / 3600 / 24).to_i
+time_with_us = ((today - adoption) / 3600 / 24).to_i
 
 def weeks(days)
   days / 7
@@ -20,5 +21,10 @@ def months(days)
   days / 30
 end
 
-puts "Puppy is #{puppy_age} days, #{weeks(puppy_age)} weeks, and #{months(puppy_age)} months old today."
-puts "Puppy has been here #{puppy_time_with_us} days, #{weeks(puppy_time_with_us)} weeks, and #{months(puppy_time_with_us)} months."
+def months_and_weeks(days)
+  remainder = days % 30
+  "#{months(days)} months, #{weeks(remainder)}"
+end
+
+puts "Puppy has been here #{time_with_us} days."
+puts "She is " + months_and_weeks(age) + " weeks old."
