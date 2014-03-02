@@ -4,7 +4,6 @@
 # purpose: uses ruby-taglib to assign artist and title to an mp3
 # dependencies: ruby-taglib
 
-require 'pry'
 
 require 'taglib'
 

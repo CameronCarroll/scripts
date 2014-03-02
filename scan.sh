@@ -1,0 +1,1 @@
+hp-scan --pdf=evince
